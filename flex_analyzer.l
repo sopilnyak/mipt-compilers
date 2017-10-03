@@ -1,17 +1,21 @@
-/* Lexical Analalyzer for MiniJava */
+/* Lexical Analyzer for MiniJava */
 
 %{
     // #define YY_USER_ACTION updateLocation()
 
-    static int line_number = 1;
-    static int column_number = 1;
-    static void updateLocation();
+    #include <stdio.h>
+    #include <ctype.h>
+
+    int line_number = 1;
+    int column_number = 1;
+    void updateLocation();
 %}
 
-DIGIT [0-9]
-LETER [a-zA-Z_]
-id {LETER}({DIGIT}|{LETER})*
+DIGIT       [0-9]
+LETTER      [a-zA-Z_]
+id          {LETTER}({DIGIT}|{LETTER})*
 IntegerLiteral [1-9]{DIGIT}*|0
+LOGICOP     (&&|\|\|)
 
 %%
 
@@ -21,9 +25,8 @@ IntegerLiteral [1-9]{DIGIT}*|0
 "extends"   printf("EXTENDS"); updateLocation(); 
 "public"    printf("PUBLIC"); updateLocation();
 "private"   printf("PRIVATE"); updateLocation();
-"static"    printf("STATIC"); updateLocation(); 
-"void"      printf("VOID"); updateLocation(); 
-"main"      printf("MAIN"); updateLocation(); 
+"static void main"    printf("STATICVOIDMAIN"); updateLocation(); 
+
 "System.out.println"    printf("SYSTEMOUT"); updateLocation();
 "String"    printf("STRING"); updateLocation();
 "int"       printf("INT"); updateLocation();
@@ -37,8 +40,8 @@ IntegerLiteral [1-9]{DIGIT}*|0
 "this"      printf("THIS"); updateLocation();
 "new"       printf("NEW"); updateLocation();
 "return"    printf("RETURN"); updateLocation();
-"&&"        printf("AND"); updateLocation();
-"||"        printf("OR"); updateLocation();
+
+{LOGICOP}   printf("LOGICOP(%s)", yytext); updateLocation();
 "("         printf("LEFTRBRACKET"); updateLocation();
 ")"         printf("RIGHTRBRACKET"); updateLocation();
 "{"         printf("LEFTCBRACKET"); updateLocation();
@@ -60,25 +63,25 @@ IntegerLiteral [1-9]{DIGIT}*|0
 {id}        {printf("ID(%s)", yytext); updateLocation();}
 {IntegerLiteral} {printf("INTEGERLITERAL(%s)", yytext); updateLocation();}
 
-[[:space:]]+ updateLocation();
+[[:space:]]+ printf("%s", yytext); updateLocation();
 
-.           {printf("error"); updateLocation();}
+.           {printf("ERROR"); updateLocation();}
 
 %%
 
-static void updateLocation()
+void updateLocation()
 {
-    for( int i = 0; i < yyleng; i++ )
+    for( int i = 0; i < yyleng; ++i )
     {
         if( yytext[i] == '\n' ) 
         {
-            line_number++;
+            ++line_number;
             column_number = 1;
         } 
         else 
         {
-            column_number++;
+            ++column_number;
         }
     }
-    printf( "(%d,%d): ", line_number, column_number );
+    printf( "(%d,%d) ", line_number, column_number );
 }
