@@ -1,10 +1,4 @@
 #!/bin/bash -e
-
-echo "Running flex analyzer..."
+bison -d syntax_analyzer.y
 flex flex_analyzer.l
-echo "Done"
-echo "Compiling..."
-gcc lex.yy.c -lfl
-echo "Done"
-echo "Input:"
-./a.out
+gcc -o parser syntax_analyzer.tab.c lex.yy.c

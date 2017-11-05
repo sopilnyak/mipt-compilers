@@ -1,8 +1,12 @@
 /* Lexical Analyzer for MiniJava */
 
-%{
-    // #define YY_USER_ACTION updateLocation()
+%option noyywrap
 
+%{
+    #define YY_USER_ACTION updateLocation();
+    #define YY_DECL int yylex()
+
+    #include "syntax_analyzer.tab.h"
     #include <stdio.h>
     #include <ctype.h>
 
@@ -11,77 +15,87 @@
     void updateLocation();
 %}
 
+%option yylineno
+
 DIGIT       [0-9]
 LETTER      [a-zA-Z_]
 id          {LETTER}({DIGIT}|{LETTER})*
 IntegerLiteral [1-9]{DIGIT}*|0
-LOGICOP     (&&|\|\|)
 
 %%
 
-"//".*$     printf("SINGLELINECOMMENT"); updateLocation();
-"/*".*"*/"  printf("COMMENT"); updateLocation();
-"class"     printf("CLASS"); updateLocation();
-"extends"   printf("EXTENDS"); updateLocation(); 
-"public"    printf("PUBLIC"); updateLocation();
-"private"   printf("PRIVATE"); updateLocation();
-"static void main"    printf("STATICVOIDMAIN"); updateLocation(); 
+"//".*$     { return SINGLELINECOMMENT; }
+"/*".*"*/"  { return COMMENT; }
+"class"     { return CLASS; }
+"extends"   { return EXTENDS; } 
+"public"    { return PUBLIC; }
+"private"   { return PRIVATE; }
+"static void main"    { return STATICVOIDMAIN; } 
 
-"System.out.println"    printf("SYSTEMOUT"); updateLocation();
-"String"    printf("STRING"); updateLocation();
-"int"       printf("INT"); updateLocation();
-"boolean"   printf("BOOLEAN"); updateLocation();
-"if"        printf("IF"); updateLocation(); 
-"else"      printf("ELSE"); updateLocation();
-"while"     printf("WHILE"); updateLocation();
-"length"    printf("LENGTH"); updateLocation();
-"true"      printf("TRUE"); updateLocation();
-"false"     printf("FALSE"); updateLocation();
-"this"      printf("THIS"); updateLocation();
-"new"       printf("NEW"); updateLocation();
-"return"    printf("RETURN"); updateLocation();
+"System.out.println"    { return SYSTEMOUT; }
+"String"    { return STRING; }
+"int"       { return INT; }
+"boolean"   { return BOOLEAN; }
+"if"        { return IF; } 
+"else"      { return ELSE; }
+"while"     { return WHILE; }
+"length"    { return LENGTH; }
+"true"      { return TRUE; }
+"false"     { return FALSE; }
+"this"      { return THIS; }
+"new"       { return NEW; }
+"return"    { return RETURN; }
 
-{LOGICOP}   printf("LOGICOP(%s)", yytext); updateLocation();
-"("         printf("LEFTRBRACKET"); updateLocation();
-")"         printf("RIGHTRBRACKET"); updateLocation();
-"{"         printf("LEFTCBRACKET"); updateLocation();
-"}"         printf("RIGHTCBRACKET"); updateLocation();
-"]"         printf("LEFTSBRACKET"); updateLocation();
-"?"         printf("QUESTION"); updateLocation();
-";"         printf("SEMICOLON"); updateLocation();
-"!"         printf("EXCLAMATION"); updateLocation();
-"<"         printf("LESS"); updateLocation();
-">"         printf("GREATER"); updateLocation();
-"="         printf("EQUALS"); updateLocation();
-"<="        printf("LEQ"); updateLocation();
-">="        printf("GEQ"); updateLocation();
-"*"         printf("ASTERISK"); updateLocation();
-"."         printf("DOT"); updateLocation();
-","         printf("COMMA"); updateLocation();
-[\+\-\*\/\%]      printf("ARITHMETICOP(%s)", yytext); updateLocation();
+"&&"        { return AND; }
+"||"        { return OR; }
 
-{id}        {printf("ID(%s)", yytext); updateLocation();}
-{IntegerLiteral} {printf("INTEGERLITERAL(%s)", yytext); updateLocation();}
+"("         { return LEFTRBRACKET; }
+")"         { return RIGHTRBRACKET; }
+"{"         { return LEFTCBRACKET; }
+"}"         { return RIGHTCBRACKET; }
+"]"         { return LEFTSBRACKET; }
+"["         { return RIGHTSBRACKET; }
 
-[[:space:]]+ printf("%s", yytext); updateLocation();
+"?"         { return QUESTION; }
+";"         { return SEMICOLON; }
+"!"         { return EXCLAMATION; }
 
-.           {printf("ERROR"); updateLocation();}
+"<"         { return LESS; }
+">"         { return GREATER; }
+"="         { return EQUALS; }
+"<="        { return LEQ; }
+">="        { return GEQ; }
+
+"."         { return DOT; }
+","         { return COMMA; }
+"+"         { return PLUS; }
+"-"         { return MINUS; }
+"*"         { return MULTIPLY; }
+"/"         { return DIVIDE; }
+"%"         { return MOD; }
+
+{id}        { return IDENTIFIER; } // yylval.id = yytext; 
+{IntegerLiteral} { return INTEGERLITERAL; } // yylval.intval = atoi(yytext); 
+
+[[:space:]]+
 
 %%
 
 void updateLocation()
 {
-    for( int i = 0; i < yyleng; ++i )
-    {
-        if( yytext[i] == '\n' ) 
-        {
-            ++line_number;
+    yylloc.first_line = line_number;
+    yylloc.first_column = column_number;
+
+    for( int i = 0; i < yyleng; i++ ) {
+        if( yytext[i] == '\n' ) {
+            line_number++;
             column_number = 1;
-        } 
-        else 
-        {
-            ++column_number;
+        } else {
+            column_number++;
         }
     }
-    printf( "(%d,%d) ", line_number, column_number );
+
+    yylloc.last_line = line_number;
+    yylloc.last_column = column_number;
+    yylval.value = strdup(yytext);
 }
