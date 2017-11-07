@@ -59,21 +59,23 @@
 %token THIS
 %token NEW
 %token RETURN
-%token AND OR
 %token LEFTRBRACKET RIGHTRBRACKET
 %token LEFTCBRACKET RIGHTCBRACKET
-%token LEFTSBRACKET RIGHTSBRACKET
-%token QUESTION
+%token RIGHTSBRACKET
 %token SEMICOLON
-%token EXCLAMATION
-%token LESS GREATER LEQ GEQ
 %token EQUALS
-%token DOT COMMA
-%token PLUS MINUS
-%token MULTIPLY DIVIDE MOD
+%token COMMA
 %token <id> IDENTIFIER
 %token <intval> INTEGERLITERAL
 %token END 0
+
+%left LEFTSBRACKET
+%left AND OR
+%left LESS
+%left DOT 
+%left PLUS MINUS
+%left MULTIPLY MOD
+%right EXCLAMATION
 
 %type <program> goal
 %type <mainClass> main_class
@@ -93,6 +95,21 @@
 %type <identifier> id
 
 %destructor { delete $$; } <program>
+%destructor { delete $$; } <mainClass>
+%destructor { delete $$; } <classes>
+%destructor { delete $$; } <classDeclaration>
+%destructor { delete $$; } <varDeclarations>
+%destructor { delete $$; } <varDeclaration>
+%destructor { delete $$; } <methodDeclarations>
+%destructor { delete $$; } <methodDeclaration>
+%destructor { delete $$; } <methodModifier>
+%destructor { delete $$; } <arguments>
+%destructor { delete $$; } <type>
+%destructor { delete $$; } <statements>
+%destructor { delete $$; } <statement>
+%destructor { delete $$; } <expressions>
+%destructor { delete $$; } <expression>
+%destructor { delete $$; } <identifier>
 
 %start goal
 

@@ -64,31 +64,26 @@ extern int yydebug;
     THIS = 273,
     NEW = 274,
     RETURN = 275,
-    AND = 276,
-    OR = 277,
-    LEFTRBRACKET = 278,
-    RIGHTRBRACKET = 279,
-    LEFTCBRACKET = 280,
-    RIGHTCBRACKET = 281,
-    LEFTSBRACKET = 282,
-    RIGHTSBRACKET = 283,
-    QUESTION = 284,
-    SEMICOLON = 285,
-    EXCLAMATION = 286,
-    LESS = 287,
-    GREATER = 288,
-    LEQ = 289,
-    GEQ = 290,
-    EQUALS = 291,
-    DOT = 292,
-    COMMA = 293,
-    PLUS = 294,
-    MINUS = 295,
-    MULTIPLY = 296,
-    DIVIDE = 297,
-    MOD = 298,
-    IDENTIFIER = 299,
-    INTEGERLITERAL = 300
+    LEFTRBRACKET = 276,
+    RIGHTRBRACKET = 277,
+    LEFTCBRACKET = 278,
+    RIGHTCBRACKET = 279,
+    RIGHTSBRACKET = 280,
+    SEMICOLON = 281,
+    EQUALS = 282,
+    COMMA = 283,
+    IDENTIFIER = 284,
+    INTEGERLITERAL = 285,
+    LEFTSBRACKET = 286,
+    AND = 287,
+    OR = 288,
+    LESS = 289,
+    DOT = 290,
+    PLUS = 291,
+    MINUS = 292,
+    MULTIPLY = 293,
+    MOD = 294,
+    EXCLAMATION = 295
   };
 #endif
 
@@ -121,7 +116,7 @@ union YYSTYPE
     IExpression* expression;
     Id* identifier;
 
-#line 125 "syntax_analyzer.tab.h" /* yacc.c:1909  */
+#line 120 "syntax_analyzer.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

@@ -58,12 +58,10 @@ IntegerLiteral [1-9]{DIGIT}*|0
 "["         { return LEFTSBRACKET; }
 "]"         { return RIGHTSBRACKET; }
 
-"?"         { return QUESTION; }
 ";"         { return SEMICOLON; }
 "!"         { return EXCLAMATION; }
 
 "<"         { return LESS; }
-">"         { return GREATER; }
 "="         { return EQUALS; }
 
 "."         { return DOT; }
@@ -71,7 +69,6 @@ IntegerLiteral [1-9]{DIGIT}*|0
 "+"         { return PLUS; }
 "-"         { return MINUS; }
 "*"         { return MULTIPLY; }
-"/"         { return DIVIDE; }
 "%"         { return MOD; }
 
 {id}        { yylval.id = yytext; return IDENTIFIER; } // yylval.id = yytext; 
