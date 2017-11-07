@@ -1,3 +1,12 @@
 *.out
 *.yy.c
 *.java
+*.o
+*.tab.h
+*.tab.c
+CMakeLists.txt
+*.output
+cmake-build-debug/
+.idea/
+*.gv
+compiler

@@ -34,7 +34,7 @@
 # define YY_YY_SYNTAX_ANALYZER_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -45,51 +45,50 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    SINGLELINECOMMENT = 258,
-    COMMENT = 259,
-    CLASS = 260,
-    EXTENDS = 261,
-    PUBLIC = 262,
-    PRIVATE = 263,
-    STATICVOIDMAIN = 264,
-    SYSTEMOUT = 265,
-    STRING = 266,
-    INT = 267,
-    BOOLEAN = 268,
-    IF = 269,
-    ELSE = 270,
-    WHILE = 271,
-    LENGTH = 272,
-    TRUE = 273,
-    FALSE = 274,
-    THIS = 275,
-    NEW = 276,
-    RETURN = 277,
-    AND = 278,
-    OR = 279,
-    LEFTRBRACKET = 280,
-    RIGHTRBRACKET = 281,
-    LEFTCBRACKET = 282,
-    RIGHTCBRACKET = 283,
-    LEFTSBRACKET = 284,
-    RIGHTSBRACKET = 285,
-    QUESTION = 286,
-    SEMICOLON = 287,
-    EXCLAMATION = 288,
-    LESS = 289,
-    GREATER = 290,
-    LEQ = 291,
-    GEQ = 292,
-    EQUALS = 293,
-    DOT = 294,
-    COMMA = 295,
-    PLUS = 296,
-    MINUS = 297,
-    MULTIPLY = 298,
-    DIVIDE = 299,
-    MOD = 300,
-    IDENTIFIER = 301,
-    INTEGERLITERAL = 302
+    END = 0,
+    CLASS = 258,
+    EXTENDS = 259,
+    PUBLIC = 260,
+    PRIVATE = 261,
+    STATICVOIDMAIN = 262,
+    SYSTEMOUT = 263,
+    STRING = 264,
+    INT = 265,
+    BOOLEAN = 266,
+    IF = 267,
+    ELSE = 268,
+    WHILE = 269,
+    LENGTH = 270,
+    TRUE = 271,
+    FALSE = 272,
+    THIS = 273,
+    NEW = 274,
+    RETURN = 275,
+    AND = 276,
+    OR = 277,
+    LEFTRBRACKET = 278,
+    RIGHTRBRACKET = 279,
+    LEFTCBRACKET = 280,
+    RIGHTCBRACKET = 281,
+    LEFTSBRACKET = 282,
+    RIGHTSBRACKET = 283,
+    QUESTION = 284,
+    SEMICOLON = 285,
+    EXCLAMATION = 286,
+    LESS = 287,
+    GREATER = 288,
+    LEQ = 289,
+    GEQ = 290,
+    EQUALS = 291,
+    DOT = 292,
+    COMMA = 293,
+    PLUS = 294,
+    MINUS = 295,
+    MULTIPLY = 296,
+    DIVIDE = 297,
+    MOD = 298,
+    IDENTIFIER = 299,
+    INTEGERLITERAL = 300
   };
 #endif
 
@@ -98,13 +97,31 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 20 "syntax_analyzer.y" /* yacc.c:1909  */
+#line 25 "syntax_analyzer.y" /* yacc.c:1909  */
 
     int intval;
-    char* id;  // TODO: all possible datatypes for semantic values
+    char* id;
     char* value;
+    Program* program;
+    MainClass* mainClass;
+    ClassDeclarationList* classes;
+    ClassDeclaration* classDeclaration;
+    VarDeclarationList* varDeclarations;
+    VarDeclaration* varDeclaration;
+    MethodDeclarationList* methodDeclarations;
+    MethodDeclaration* methodDeclaration;
+    MethodModifier* methodModifier;
+    ArgumentList* arguments;
+    IType* type;
+    PrimitiveType* primitiveType;
+    ClassType* classType;
+    StatementList* statements;
+    IStatement* statement;
+    ExpressionList* expressions;
+    IExpression* expression;
+    Id* identifier;
 
-#line 108 "syntax_analyzer.tab.h" /* yacc.c:1909  */
+#line 125 "syntax_analyzer.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

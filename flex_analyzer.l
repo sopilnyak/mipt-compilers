@@ -6,9 +6,11 @@
     #define YY_USER_ACTION updateLocation();
     #define YY_DECL int yylex()
 
+    #include "visitor.h"
     #include "syntax_analyzer.tab.h"
     #include <stdio.h>
     #include <ctype.h>
+    #include <iostream>
 
     int line_number = 1;
     int column_number = 1;
@@ -24,8 +26,8 @@ IntegerLiteral [1-9]{DIGIT}*|0
 
 %%
 
-"//".*$     { return SINGLELINECOMMENT; }
-"/*".*"*/"  { return COMMENT; }
+"//".*$      
+"/*".*"*/"  
 "class"     { return CLASS; }
 "extends"   { return EXTENDS; } 
 "public"    { return PUBLIC; }
@@ -53,8 +55,8 @@ IntegerLiteral [1-9]{DIGIT}*|0
 ")"         { return RIGHTRBRACKET; }
 "{"         { return LEFTCBRACKET; }
 "}"         { return RIGHTCBRACKET; }
-"]"         { return LEFTSBRACKET; }
-"["         { return RIGHTSBRACKET; }
+"["         { return LEFTSBRACKET; }
+"]"         { return RIGHTSBRACKET; }
 
 "?"         { return QUESTION; }
 ";"         { return SEMICOLON; }
@@ -63,8 +65,6 @@ IntegerLiteral [1-9]{DIGIT}*|0
 "<"         { return LESS; }
 ">"         { return GREATER; }
 "="         { return EQUALS; }
-"<="        { return LEQ; }
-">="        { return GEQ; }
 
 "."         { return DOT; }
 ","         { return COMMA; }
@@ -74,8 +74,8 @@ IntegerLiteral [1-9]{DIGIT}*|0
 "/"         { return DIVIDE; }
 "%"         { return MOD; }
 
-{id}        { return IDENTIFIER; } // yylval.id = yytext; 
-{IntegerLiteral} { return INTEGERLITERAL; } // yylval.intval = atoi(yytext); 
+{id}        { yylval.id = yytext; return IDENTIFIER; } // yylval.id = yytext; 
+{IntegerLiteral} { yylval.intval = atoi(yytext); return INTEGERLITERAL; } // yylval.intval = atoi(yytext); 
 
 [[:space:]]+
 
