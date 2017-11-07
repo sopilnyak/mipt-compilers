@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 class IStatement: public Visitable
 {
@@ -83,8 +84,8 @@ public:
         visitor->visit(this);
     }
 
-    IExpression* condition_;
-    IStatement* action_;
+    std::unique_ptr<IExpression> condition_;
+    std::unique_ptr<IStatement> action_;
 };
 
 class SystemOutStatement: public IStatement
@@ -99,7 +100,7 @@ public:
         visitor->visit(this);
     }
 
-    IExpression* toPrint_;
+    std::unique_ptr<IExpression> toPrint_;
 };
 
 class AssignStatement: public IStatement
@@ -114,8 +115,8 @@ public:
         visitor->visit(this);
     }
 
-    Id* lValue_;
-    IExpression* rValue_;
+    std::unique_ptr<Id> lValue_;
+    std::unique_ptr<IExpression> rValue_;
 };
 
 class ArrayAssignStatement: public IStatement
@@ -130,9 +131,9 @@ public:
         visitor->visit(this);
     }
 
-    Id* lValue_;
-    IExpression* index_;
-    IExpression* rValue_;
+    std::unique_ptr<Id> lValue_;
+    std::unique_ptr<IExpression> index_;
+    std::unique_ptr<IExpression> rValue_;
 };
 
 #endif // MINIJAVA_STATEMENT_H

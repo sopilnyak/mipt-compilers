@@ -94,22 +94,9 @@
 %type <expression> expression
 %type <identifier> id
 
-%destructor { delete $$; } <program>
-%destructor { delete $$; } <mainClass>
-%destructor { delete $$; } <classes>
-%destructor { delete $$; } <classDeclaration>
-%destructor { delete $$; } <varDeclarations>
-%destructor { delete $$; } <varDeclaration>
-%destructor { delete $$; } <methodDeclarations>
-%destructor { delete $$; } <methodDeclaration>
-%destructor { delete $$; } <methodModifier>
-%destructor { delete $$; } <arguments>
-%destructor { delete $$; } <type>
-%destructor { delete $$; } <statements>
-%destructor { delete $$; } <statement>
-%destructor { delete $$; } <expressions>
-%destructor { delete $$; } <expression>
-%destructor { delete $$; } <identifier>
+%destructor { delete $$; } <program> <mainClass> <classes> <classDeclaration> <varDeclarations> <varDeclaration>
+<methodDeclarations> <methodDeclaration> <methodModifier> <arguments> <type> <statements> <statement>
+<expressions> <expression> <identifier>
 
 %start goal
 
@@ -150,10 +137,14 @@ method_declarations : method_declarations method_declaration { $$ = new MethodDe
                     | method_declaration { $$ = new MethodDeclarationList(nullptr, $1); print_(); }
                     ;
 
-method_declaration  : method_modifier type id LEFTRBRACKET arguments RIGHTRBRACKET LEFTCBRACKET var_declarations statements RETURN expression SEMICOLON RIGHTCBRACKET { $$ = new MethodDeclaration($1, $2, $3, $5, $8, $9, $11); print_(); }
-                    | method_modifier type id LEFTRBRACKET arguments RIGHTRBRACKET LEFTCBRACKET var_declarations RETURN expression SEMICOLON RIGHTCBRACKET { $$ = new MethodDeclaration($1, $2, $3, $5, $8, nullptr, $10); print_(); }
-                    | method_modifier type id LEFTRBRACKET arguments RIGHTRBRACKET LEFTCBRACKET statements RETURN expression SEMICOLON RIGHTCBRACKET { $$ = new MethodDeclaration($1, $2, $3, $5, nullptr, $8, $10); print_(); }
-                    | method_modifier type id LEFTRBRACKET arguments RIGHTRBRACKET LEFTCBRACKET RETURN expression SEMICOLON RIGHTCBRACKET { $$ = new MethodDeclaration($1, $2, $3, $5, nullptr, nullptr, $9); print_(); }
+method_declaration  : method_modifier type id LEFTRBRACKET arguments RIGHTRBRACKET LEFTCBRACKET var_declarations statements 
+                      RETURN expression SEMICOLON RIGHTCBRACKET { $$ = new MethodDeclaration($1, $2, $3, $5, $8, $9, $11); print_(); }
+                    | method_modifier type id LEFTRBRACKET arguments RIGHTRBRACKET LEFTCBRACKET var_declarations 
+                      RETURN expression SEMICOLON RIGHTCBRACKET { $$ = new MethodDeclaration($1, $2, $3, $5, $8, nullptr, $10); print_(); }
+                    | method_modifier type id LEFTRBRACKET arguments RIGHTRBRACKET LEFTCBRACKET statements 
+                      RETURN expression SEMICOLON RIGHTCBRACKET { $$ = new MethodDeclaration($1, $2, $3, $5, nullptr, $8, $10); print_(); }
+                    | method_modifier type id LEFTRBRACKET arguments RIGHTRBRACKET LEFTCBRACKET 
+                      RETURN expression SEMICOLON RIGHTCBRACKET { $$ = new MethodDeclaration($1, $2, $3, $5, nullptr, nullptr, $9); print_(); }
                     ;
 
 method_modifier     : PUBLIC { $$ = new MethodModifier(T_PUBLIC); print_(); }

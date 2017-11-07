@@ -61,18 +61,25 @@ public:
         switch (type) {
             case T_AND:
                 string_type_ = "and";
+                break;
             case T_OR:
                 string_type_ = "or";
+                break;
             case T_LESS:
                 string_type_ = "<";
+                break;
             case T_MINUS:
                 string_type_ = "-";
+                break;
             case T_PLUS:
                 string_type_ = "+";
+                break;
             case T_MULTIPLY:
                 string_type_ = "*";
+                break;
             case T_MOD:
                 string_type_ = "%";
+                break;
         }
     }
 
@@ -83,8 +90,8 @@ public:
 
     BinaryExpressionValue type_;
     std::string string_type_;
-    IExpression* left_;
-    IExpression* right_;
+    std::unique_ptr<IExpression> left_;
+    std::unique_ptr<IExpression> right_;
 };
 
 class ArrayMemberExpression: public IExpression
@@ -99,8 +106,8 @@ public:
         visitor->visit(this);
     }
 
-    IExpression* object_;
-    IExpression* index_;
+    std::unique_ptr<IExpression> object_;
+    std::unique_ptr<IExpression> index_;
 };
 
 class ArrayLengthExpression: public IExpression
@@ -115,7 +122,7 @@ public:
         visitor->visit(this);
     }
 
-    IExpression* object_;
+    std::unique_ptr<IExpression> object_;
 };
 
 class CallMemberExpression: public IExpression
@@ -135,8 +142,8 @@ public:
         visitor->visit(this);
     }
 
-    IExpression* expression_;
-    Id* id_;
+    std::unique_ptr<IExpression> expression_;
+    std::unique_ptr<Id> id_;
     std::vector<IExpression*> parameters_;
 };
 
@@ -170,8 +177,10 @@ public:
         switch (value) {
             case T_TRUE:
                 string_value_ = "true";
+                break;
             case T_FALSE:
                 string_value_= "false";
+                break;
         }
     }
 
@@ -207,7 +216,7 @@ public:
         visitor->visit(this);
     }
 
-    IExpression* size_;
+    std::unique_ptr<IExpression> size_;
 };
 
 class ObjectExpression: public IExpression
@@ -222,7 +231,7 @@ public:
         visitor->visit(this);
     }
 
-    Id* id_;
+    std::unique_ptr<Id> id_;
 };
 
 class NotExpression: public IExpression
@@ -237,7 +246,7 @@ public:
         visitor->visit(this);
     }
 
-    IExpression* expression_;
+    std::unique_ptr<IExpression> expression_;
 };
 
 class IdExpression: public IExpression
@@ -252,7 +261,7 @@ public:
         visitor->visit(this);
     }
 
-    Id* id_;
+    std::unique_ptr<Id> id_;
 };
 
 #endif // MINIJAVA_EXPRESSION_H

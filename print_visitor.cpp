@@ -18,7 +18,7 @@ void PrintVisitor::visit(const Program* node)
 {
     printVertex(node, "Program");
     node->main_->accept(this);
-    printEdge(node, node->main_);
+    printEdge(node, node->main_.get());
 
     for (auto el : node->classes_)
     {
@@ -31,7 +31,7 @@ void PrintVisitor::visit(const MainClass* node)
 {
     printVertex(node, "MainClass");
     node->id_->accept(this);
-    printEdge(node, node->id_);
+    printEdge(node, node->id_.get());
     node->parameters_->accept(this);
     printEdge(node, node->parameters_, "parameter_id");
 
@@ -45,7 +45,7 @@ void PrintVisitor::visit(const ClassDeclaration* node)
 {
     printVertex(node, "Class");
     node->id_->accept(this);
-    printEdge(node, node->id_);
+    printEdge(node, node->id_.get());
     for (auto method : node->methods_)
     {
         method->accept(this);
@@ -62,16 +62,16 @@ void PrintVisitor::visit(const SystemOutStatement* node)
 {
     printVertex(node, "System.Out.Println");
     node->toPrint_->accept(this);
-    printEdge(node, node->toPrint_);
+    printEdge(node, node->toPrint_.get());
 }
 
 void PrintVisitor::visit(const CallMemberExpression* node)
 {
     printVertex(node, "CallMember");
     node->id_->accept(this);
-    printEdge(node, node->id_);
+    printEdge(node, node->id_.get());
     node->expression_->accept(this);
-    printEdge(node, node->expression_, "expression");
+    printEdge(node, node->expression_.get(), "expression");
     for (auto parameter : node->parameters_)
     {
         parameter->accept(this);
@@ -88,8 +88,8 @@ void PrintVisitor::visit(const BinaryExpression* node){
     printVertex(node, node->string_type_);
     node->left_->accept(this);
     node->right_->accept(this);
-    printEdge(node, node->left_, "left");
-    printEdge(node, node->right_, "right");
+    printEdge(node, node->left_.get(), "left");
+    printEdge(node, node->right_.get(), "right");
 }
 
 void PrintVisitor::visit(const BooleanExpression* node)  {
@@ -99,7 +99,7 @@ void PrintVisitor::visit(const BooleanExpression* node)  {
 void PrintVisitor::visit(const MethodDeclaration* node)  {
     printVertex(node, "( " + node->modifier_->string_modifier_ + " " + node->type_->type_name_ + ") method");
     node->id_->accept(this);
-    printEdge(node, node->id_);
+    printEdge(node, node->id_.get());
 
     for (auto var : node->vars_)
     {
@@ -120,15 +120,15 @@ void PrintVisitor::visit(const MethodDeclaration* node)  {
     }
 
     node->expression_->accept(this);
-    printEdge(node, node->expression_, "return");
+    printEdge(node, node->expression_.get(), "return");
 }
 
 void PrintVisitor::visit(const AssignStatement* node)  {
     printVertex(node, "=");
     node->lValue_->accept(this);
     node->rValue_->accept(this);
-    printEdge(node, node->lValue_, "left");
-    printEdge(node, node->rValue_, "right");
+    printEdge(node, node->lValue_.get(), "left");
+    printEdge(node, node->rValue_.get(), "right");
 }
 
 void PrintVisitor::visit(const IfElseStatement* node)
@@ -146,46 +146,46 @@ void PrintVisitor::visit(const NotExpression* node)
 {
     printVertex(node, "Not");
     node->expression_->accept(this);
-    printEdge(node, node->expression_);
+    printEdge(node, node->expression_.get());
 }
 
 void PrintVisitor::visit(const IntArrayExpression* node)
 {
     printVertex(node, "new int[]");
     node->size_->accept(this);
-    printEdge(node, node->size_, "size");
+    printEdge(node, node->size_.get(), "size");
 }
 
 void PrintVisitor::visit(const ObjectExpression* node)
 {
     printVertex(node, "new");
     node->id_->accept(this);
-    printEdge(node, node->id_);
+    printEdge(node, node->id_.get());
 }
 
 void PrintVisitor::visit(const ArrayAssignStatement* node)
 {
     printVertex(node, "=");
     node->lValue_->accept(this);
-    printEdge(node, node->lValue_, "array");
+    printEdge(node, node->lValue_.get(), "array");
     node->index_->accept(this);
-    printEdge(node, node->index_, "index");
+    printEdge(node, node->index_.get(), "index");
     node->rValue_->accept(this);
-    printEdge(node, node->rValue_);
+    printEdge(node, node->rValue_.get());
 }
 
 void PrintVisitor::visit(const ArrayLengthExpression* node)
 {
     printVertex(node, "getLength");
     node->object_->accept(this);
-    printEdge(node, node->object_, "object");
+    printEdge(node, node->object_.get(), "object");
 }
 
 void PrintVisitor::visit(const IdExpression* node)
 {
     printVertex(node, "idExpression");
     node->id_->accept(this);
-    printEdge(node, node->id_, "id");
+    printEdge(node, node->id_.get(), "id");
 }
 
 void PrintVisitor::visit(const Statements* node)  {
@@ -200,14 +200,14 @@ void PrintVisitor::visit(const ArrayMemberExpression* node) {
     printVertex(node, "ArrayMember");
     node->object_->accept(this);
     node->index_->accept(this);
-    printEdge(node, node->object_, "object");
-    printEdge(node, node->index_, "position");
+    printEdge(node, node->object_.get(), "object");
+    printEdge(node, node->index_.get(), "position");
 }
 
 void PrintVisitor::visit(const Argument* node) {
     printVertex(node, node->type_->type_name_);
     node->id_->accept(this);
-    printEdge(node, node->id_);
+    printEdge(node, node->id_.get());
 }
 
 void PrintVisitor::visit(const VarDeclaration* node)
@@ -224,12 +224,12 @@ void PrintVisitor::visit(const WhileStatement* node)
 {
     printVertex(node, "while");
     node->condition_->accept(this);
-    printEdge(node, node->condition_, "condition");
+    printEdge(node, node->condition_.get(), "condition");
     node->action_->accept(this);
-    printEdge(node, node->action_, "action");
+    printEdge(node, node->action_.get(), "action");
 }
 
-void PrintVisitor::printEdge(const Visitable* from, const Visitable * to)
+void PrintVisitor::printEdge(const Visitable* from, const Visitable* to)
 {
     output << "node" << from << "->" << "node" << to << "\n";
 }

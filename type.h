@@ -46,7 +46,7 @@ public:
         type_name_ = id->getName();
     }
 
-    Id* id;
+    std::unique_ptr<Id> id;
 };
 
 #endif // MINIJAVA_TYPE_H

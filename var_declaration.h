@@ -3,6 +3,7 @@
 
 #include "visitor.h"
 #include <vector>
+#include <memory>
 
 class VarDeclaration: public Visitable
 {
@@ -16,8 +17,8 @@ public:
         visitor->visit(this);
     }
 
-    IType* type_;
-    Id* id_;
+    std::unique_ptr<IType> type_;
+    std::unique_ptr<Id> id_;
 };
 
 class VarDeclarationList
@@ -41,4 +42,4 @@ public:
     std::vector<VarDeclaration*> var_declarations_;
 };
 
-#endif //MINIJAVA_VAR_DECLARATION_H
+#endif // MINIJAVA_VAR_DECLARATION_H

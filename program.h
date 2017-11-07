@@ -24,7 +24,7 @@ public:
         visitor->visit(this);
     }
 
-    MainClass* main_;
+    std::unique_ptr<MainClass> main_;
     std::vector<ClassDeclaration*> classes_;
 };
 

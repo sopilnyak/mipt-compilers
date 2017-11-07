@@ -29,8 +29,8 @@ public:
         visitor->visit(this);
     }
 
-    Id* id_;
-    Id* parentId_;
+    std::unique_ptr<Id> id_;
+    std::unique_ptr<Id> parentId_;
     std::vector<VarDeclaration*> vars_;
     std::vector<MethodDeclaration*> methods_;
 };
@@ -73,7 +73,7 @@ public:
         visitor->visit(this);
     }
 
-    Id* id_;
+    std::unique_ptr<Id> id_;
     Id* parameters_;
     std::vector<IStatement*> statements_;
 };

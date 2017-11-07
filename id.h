@@ -9,7 +9,7 @@ class Id: public Visitable
 public:
     explicit Id(const std::string &name)
     {
-        if (name.empty())
+        if (!name.empty())
         {
             name_ = name;
         }

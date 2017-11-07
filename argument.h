@@ -3,6 +3,7 @@
 
 #include "visitable.h"
 #include <vector>
+#include <memory>
 
 class Argument: public Visitable
 {
@@ -16,8 +17,8 @@ public:
         visitor->visit(this);
     }
 
-    IType* type_;
-    Id* id_;
+    std::unique_ptr<IType> type_;
+    std::unique_ptr<Id> id_;
 };
 
 class ArgumentList

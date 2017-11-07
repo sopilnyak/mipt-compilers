@@ -21,7 +21,7 @@ class PrintVisitor: public Visitor
 public:
     explicit PrintVisitor(std::string path);
     ~PrintVisitor() override;
-    
+
     void printEdge(const Visitable* from, const Visitable* to);
     void printVertex(const Visitable* node, std::string label);
     void printEdge(const Visitable* from, const Visitable* to, std::string label);

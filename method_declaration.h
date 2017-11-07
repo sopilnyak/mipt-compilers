@@ -7,6 +7,7 @@
 #include "argument.h"
 
 #include <vector>
+#include <memory>
 
 class MethodDeclaration: public Visitable
 {
@@ -40,13 +41,13 @@ public:
         visitor->visit(this);
     }
 
-    MethodModifier* modifier_;
-    IType* type_;
-    Id* id_;
+    std::unique_ptr<MethodModifier> modifier_;
+    std::unique_ptr<IType> type_;
+    std::unique_ptr<Id> id_;
     std::vector<Argument*> arguments_;
     std::vector<VarDeclaration*> vars_;
     std::vector<IStatement*> statements_;
-    IExpression* expression_;
+    std::unique_ptr<IExpression> expression_;
 };
 
 class MethodDeclarationList
