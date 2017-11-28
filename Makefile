@@ -1,10 +1,13 @@
-all: compiler
+all: ast
 
 clean:
-	rm compiler flex_analyzer.o syntax_analyzer.o print_visitor.o syntax_analyzer.tab.h syntax_analyzer.tab.c lex.yy.c
+	rm ast flex_analyzer.o syntax_analyzer.o print_visitor.o syntax_analyzer.tab.h syntax_analyzer.tab.c lex.yy.c
 
-compiler: syntax_analyzer.o flex_analyzer.o print_visitor.o
-	g++ -g -o compiler print_visitor.o flex_analyzer.o syntax_analyzer.o -lfl
+ast: syntax_analyzer.o flex_analyzer.o print_visitor.o ast.o
+	g++ -g -o ast print_visitor.o flex_analyzer.o syntax_analyzer.o ast.o -lfl
+
+ast.o:
+	g++ -g -c abstract_syntax_tree.cpp -o ast.o
 
 syntax_analyzer.o: syntax_analyzer.y
 	bison -dt --verbose syntax_analyzer.y && g++ -g -c --std=c++14 syntax_analyzer.tab.c -o syntax_analyzer.o

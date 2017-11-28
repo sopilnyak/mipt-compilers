@@ -78,7 +78,7 @@
     void yyerror(const char* s);
     void print_();
 
-    PrintVisitor* printer = new PrintVisitor("./output.gv");
+    Program* program;
 
 #line 84 "syntax_analyzer.tab.c" /* yacc.c:339  */
 
@@ -520,13 +520,13 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   105,   105,   106,   109,   115,   116,   119,   120,   121,
-     122,   123,   124,   125,   126,   129,   130,   133,   136,   137,
-     140,   142,   144,   146,   150,   151,   154,   155,   156,   159,
-     160,   161,   162,   165,   166,   169,   170,   171,   172,   173,
-     174,   177,   178,   181,   182,   183,   184,   185,   186,   187,
-     188,   189,   190,   191,   192,   193,   194,   195,   196,   197,
-     198,   199,   200,   203
+       0,   101,   101,   102,   105,   111,   112,   115,   116,   117,
+     118,   119,   120,   121,   122,   125,   126,   129,   132,   133,
+     136,   138,   140,   142,   146,   147,   150,   151,   152,   155,
+     156,   157,   158,   161,   162,   165,   166,   167,   168,   169,
+     170,   173,   174,   177,   178,   179,   180,   181,   182,   183,
+     184,   185,   186,   187,   188,   189,   190,   191,   192,   193,
+     194,   195,   196,   199
 };
 #endif
 
@@ -1272,108 +1272,7 @@ yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocatio
   YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  switch (yytype)
-    {
-          case 42: /* goal  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).program); }
-#line 1281 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 43: /* main_class  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).mainClass); }
-#line 1287 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 44: /* classes  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).classes); }
-#line 1293 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 45: /* class  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).classDeclaration); }
-#line 1299 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 46: /* var_declarations  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).varDeclarations); }
-#line 1305 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 47: /* var_declaration  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).varDeclaration); }
-#line 1311 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 48: /* method_declarations  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).methodDeclarations); }
-#line 1317 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 49: /* method_declaration  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).methodDeclaration); }
-#line 1323 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 50: /* method_modifier  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).methodModifier); }
-#line 1329 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 51: /* arguments  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).arguments); }
-#line 1335 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 52: /* type  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).type); }
-#line 1341 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 53: /* statements  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).statements); }
-#line 1347 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 54: /* statement  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).statement); }
-#line 1353 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 55: /* expressions  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).expressions); }
-#line 1359 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 56: /* expression  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).expression); }
-#line 1365 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-    case 57: /* id  */
-#line 97 "syntax_analyzer.y" /* yacc.c:1257  */
-      { delete ((*yyvaluep).identifier); }
-#line 1371 "syntax_analyzer.tab.c" /* yacc.c:1257  */
-        break;
-
-
-      default:
-        break;
-    }
+  YYUSE (yytype);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1653,379 +1552,379 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 105 "syntax_analyzer.y" /* yacc.c:1646  */
-    { (yyval.program) = new Program((yyvsp[-2].mainClass), (yyvsp[-1].classes)); (yyval.program)->accept(printer); print_(); }
-#line 1659 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 101 "syntax_analyzer.y" /* yacc.c:1646  */
+    { (yyval.program) = new Program((yyvsp[-2].mainClass), (yyvsp[-1].classes)); program = (yyval.program); print_(); }
+#line 1558 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 106 "syntax_analyzer.y" /* yacc.c:1646  */
-    { (yyval.program) = new Program((yyvsp[-1].mainClass), nullptr); (yyval.program)->accept(printer); print_(); }
-#line 1665 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 102 "syntax_analyzer.y" /* yacc.c:1646  */
+    { (yyval.program) = new Program((yyvsp[-1].mainClass), nullptr); program = (yyval.program); print_(); }
+#line 1564 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 112 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 108 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.mainClass) = new MainClass((yyvsp[-13].identifier), (yyvsp[-5].identifier), (yyvsp[-2].statements)); print_(); }
-#line 1671 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1570 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 115 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 111 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classes) = new ClassDeclarationList((yyvsp[-1].classes), (yyvsp[0].classDeclaration)); print_(); }
-#line 1677 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1576 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 116 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 112 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classes) = new ClassDeclarationList(nullptr, (yyvsp[0].classDeclaration)); print_(); }
-#line 1683 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1582 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 119 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 115 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classDeclaration) = new ClassDeclaration((yyvsp[-2].identifier), nullptr, nullptr, nullptr); print_(); }
-#line 1689 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1588 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 120 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 116 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classDeclaration) = new ClassDeclaration((yyvsp[-3].identifier), nullptr, (yyvsp[-1].varDeclarations), nullptr); print_(); }
-#line 1695 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1594 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 121 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 117 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classDeclaration) = new ClassDeclaration((yyvsp[-3].identifier), nullptr, nullptr, (yyvsp[-1].methodDeclarations)); print_(); }
-#line 1701 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1600 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 122 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 118 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classDeclaration) = new ClassDeclaration((yyvsp[-4].identifier), nullptr, (yyvsp[-2].varDeclarations), (yyvsp[-1].methodDeclarations)); print_(); }
-#line 1707 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1606 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 123 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 119 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classDeclaration) = new ClassDeclaration((yyvsp[-4].identifier), (yyvsp[-2].identifier), nullptr, nullptr); print_(); }
-#line 1713 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1612 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 124 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 120 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classDeclaration) = new ClassDeclaration((yyvsp[-5].identifier), (yyvsp[-3].identifier), (yyvsp[-1].varDeclarations), nullptr); print_(); }
-#line 1719 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1618 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 125 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 121 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classDeclaration) = new ClassDeclaration((yyvsp[-5].identifier), (yyvsp[-3].identifier), nullptr, (yyvsp[-1].methodDeclarations)); print_(); }
-#line 1725 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1624 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 126 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 122 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.classDeclaration) = new ClassDeclaration((yyvsp[-6].identifier), (yyvsp[-4].identifier), (yyvsp[-2].varDeclarations), (yyvsp[-1].methodDeclarations)); print_(); }
-#line 1731 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1630 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 129 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 125 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.varDeclarations) = new VarDeclarationList((yyvsp[-1].varDeclarations), (yyvsp[0].varDeclaration)); print_(); }
-#line 1737 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1636 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 130 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 126 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.varDeclarations) = new VarDeclarationList(nullptr, (yyvsp[0].varDeclaration)); print_(); }
-#line 1743 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1642 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 133 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 129 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.varDeclaration) = new VarDeclaration((yyvsp[-2].type), (yyvsp[-1].identifier)); print_(); }
-#line 1749 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1648 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 136 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 132 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.methodDeclarations) = new MethodDeclarationList((yyvsp[-1].methodDeclarations), (yyvsp[0].methodDeclaration)); print_(); }
-#line 1755 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1654 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 137 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 133 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.methodDeclarations) = new MethodDeclarationList(nullptr, (yyvsp[0].methodDeclaration)); print_(); }
-#line 1761 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1660 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 141 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 137 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.methodDeclaration) = new MethodDeclaration((yyvsp[-12].methodModifier), (yyvsp[-11].type), (yyvsp[-10].identifier), (yyvsp[-8].arguments), (yyvsp[-5].varDeclarations), (yyvsp[-4].statements), (yyvsp[-2].expression)); print_(); }
-#line 1767 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1666 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 143 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 139 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.methodDeclaration) = new MethodDeclaration((yyvsp[-11].methodModifier), (yyvsp[-10].type), (yyvsp[-9].identifier), (yyvsp[-7].arguments), (yyvsp[-4].varDeclarations), nullptr, (yyvsp[-2].expression)); print_(); }
-#line 1773 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1672 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 145 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 141 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.methodDeclaration) = new MethodDeclaration((yyvsp[-11].methodModifier), (yyvsp[-10].type), (yyvsp[-9].identifier), (yyvsp[-7].arguments), nullptr, (yyvsp[-4].statements), (yyvsp[-2].expression)); print_(); }
-#line 1779 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1678 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 147 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 143 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.methodDeclaration) = new MethodDeclaration((yyvsp[-10].methodModifier), (yyvsp[-9].type), (yyvsp[-8].identifier), (yyvsp[-6].arguments), nullptr, nullptr, (yyvsp[-2].expression)); print_(); }
-#line 1785 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1684 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 150 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 146 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.methodModifier) = new MethodModifier(T_PUBLIC); print_(); }
-#line 1791 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1690 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 151 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 147 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.methodModifier) = new MethodModifier(T_PRIVATE); print_(); }
-#line 1797 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1696 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 154 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 150 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.arguments) = new ArgumentList((yyvsp[-3].arguments), (yyvsp[-1].type), (yyvsp[0].identifier)); print_(); }
-#line 1803 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1702 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 155 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 151 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.arguments) = new ArgumentList((yyvsp[-1].type), (yyvsp[0].identifier)); print_(); }
-#line 1809 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1708 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 156 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 152 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.arguments) = nullptr; print_(); }
-#line 1815 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1714 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 159 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 155 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.type) = new PrimitiveType(T_INT_ARRAY); print_(); }
-#line 1821 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1720 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 160 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 156 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.type) = new PrimitiveType(T_BOOLEAN); print_(); }
-#line 1827 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1726 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 161 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 157 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.type) = new PrimitiveType(T_INT); print_(); }
-#line 1833 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1732 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 162 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 158 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.type) = new ClassType((yyvsp[0].identifier)); print_(); }
-#line 1839 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1738 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 165 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 161 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.statements) = new StatementList((yyvsp[-1].statements), (yyvsp[0].statement)); print_(); }
-#line 1845 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1744 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 166 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 162 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.statements) = new StatementList(nullptr, (yyvsp[0].statement)); print_(); }
-#line 1851 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1750 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 169 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 165 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.statement) = new Statements((yyvsp[-1].statements)); print_(); }
-#line 1857 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1756 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 170 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 166 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.statement) = new IfElseStatement((yyvsp[-4].expression), (yyvsp[-2].statement), (yyvsp[0].statement)); print_(); }
-#line 1863 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1762 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 171 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 167 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.statement) = new WhileStatement((yyvsp[-2].expression), (yyvsp[0].statement)); print_(); }
-#line 1869 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1768 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 172 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 168 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.statement) = new SystemOutStatement((yyvsp[-2].expression)); print_(); }
-#line 1875 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1774 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 173 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 169 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.statement) = new AssignStatement((yyvsp[-3].identifier), (yyvsp[-1].expression)); print_(); }
-#line 1881 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1780 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 174 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 170 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.statement) = new ArrayAssignStatement((yyvsp[-6].identifier), (yyvsp[-4].expression), (yyvsp[-1].expression)); print_(); }
-#line 1887 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1786 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 177 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 173 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expressions) = new ExpressionList((yyvsp[-2].expressions), (yyvsp[0].expression)); print_(); }
-#line 1893 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1792 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 178 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 174 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expressions) = new ExpressionList((yyvsp[0].expression)); print_(); }
-#line 1899 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1798 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 181 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 177 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BinaryExpression(T_AND, (yyvsp[-2].expression), (yyvsp[0].expression)); print_(); }
-#line 1905 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1804 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 182 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 178 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BinaryExpression(T_LESS, (yyvsp[-2].expression), (yyvsp[0].expression)); print_(); }
-#line 1911 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1810 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 183 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 179 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BinaryExpression(T_PLUS, (yyvsp[-2].expression), (yyvsp[0].expression)); print_(); }
-#line 1917 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1816 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 184 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 180 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BinaryExpression(T_MINUS, (yyvsp[-2].expression), (yyvsp[0].expression)); print_(); }
-#line 1923 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1822 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 185 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 181 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BinaryExpression(T_MULTIPLY, (yyvsp[-2].expression), (yyvsp[0].expression)); print_(); }
-#line 1929 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1828 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 186 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 182 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BinaryExpression(T_MOD, (yyvsp[-2].expression), (yyvsp[0].expression)); print_(); }
-#line 1935 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1834 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 187 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 183 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BinaryExpression(T_OR, (yyvsp[-2].expression), (yyvsp[0].expression)); print_(); }
-#line 1941 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1840 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 188 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 184 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new ArrayMemberExpression((yyvsp[-3].expression), (yyvsp[-1].expression)); print_(); }
-#line 1947 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1846 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 189 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 185 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new ArrayLengthExpression((yyvsp[-2].expression)); print_(); }
-#line 1953 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1852 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 190 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 186 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new CallMemberExpression((yyvsp[-5].expression), (yyvsp[-3].identifier), (yyvsp[-1].expressions)); print_(); }
-#line 1959 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1858 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 191 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 187 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new CallMemberExpression((yyvsp[-4].expression), (yyvsp[-2].identifier), nullptr); print_(); }
-#line 1965 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1864 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 192 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 188 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new IntegerExpression(yylval.intval); }
-#line 1971 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1870 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 193 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 189 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BooleanExpression(T_TRUE); print_(); }
-#line 1977 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1876 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 194 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 190 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new BooleanExpression(T_FALSE); print_(); }
-#line 1983 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1882 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 195 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 191 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new IdExpression((yyvsp[0].identifier)); print_(); }
-#line 1989 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1888 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 196 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 192 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new ThisExpression(); print_(); }
-#line 1995 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1894 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 197 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 193 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new IntArrayExpression((yyvsp[-1].expression)); print_(); }
-#line 2001 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1900 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 198 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 194 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new ObjectExpression((yyvsp[-2].identifier)); print_(); }
-#line 2007 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1906 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 199 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 195 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = new NotExpression((yyvsp[0].expression)); print_(); }
-#line 2013 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1912 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 200 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 196 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.expression) = (yyvsp[-1].expression); print_(); }
-#line 2019 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1918 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 203 "syntax_analyzer.y" /* yacc.c:1646  */
+#line 199 "syntax_analyzer.y" /* yacc.c:1646  */
     { (yyval.identifier) = new Id(yylval.id); print_(); }
-#line 2025 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1924 "syntax_analyzer.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2029 "syntax_analyzer.tab.c" /* yacc.c:1646  */
+#line 1928 "syntax_analyzer.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2260,19 +2159,8 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 206 "syntax_analyzer.y" /* yacc.c:1906  */
+#line 202 "syntax_analyzer.y" /* yacc.c:1906  */
 
-
-int main() 
-{
-    yyin = stdin;
-    do {
-        yyparse();
-    } while(!feof(yyin));
-    delete printer;
-
-    return 0;
-}
 
 void yyerror(char const* s) 
 {

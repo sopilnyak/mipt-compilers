@@ -15,7 +15,7 @@
     void yyerror(const char* s);
     void print_();
 
-    PrintVisitor* printer = new PrintVisitor("./output.gv");
+    Program* program;
 %}
 
 %locations
@@ -94,16 +94,12 @@
 %type <expression> expression
 %type <identifier> id
 
-%destructor { delete $$; } <program> <mainClass> <classes> <classDeclaration> <varDeclarations> <varDeclaration>
-<methodDeclarations> <methodDeclaration> <methodModifier> <arguments> <type> <statements> <statement>
-<expressions> <expression> <identifier>
-
 %start goal
 
 %%
 
-goal                : main_class classes END { $$ = new Program($1, $2); $$->accept(printer); print_(); }
-                    | main_class END { $$ = new Program($1, nullptr); $$->accept(printer); print_(); }
+goal                : main_class classes END { $$ = new Program($1, $2); program = $$; print_(); }
+                    | main_class END { $$ = new Program($1, nullptr); program = $$; print_(); }
                     ;
 
 main_class          : CLASS id LEFTCBRACKET
@@ -204,17 +200,6 @@ id                  : IDENTIFIER { $$ = new Id(yylval.id); print_(); }
                     ;
 
 %%
-
-int main() 
-{
-    yyin = stdin;
-    do {
-        yyparse();
-    } while(!feof(yyin));
-    delete printer;
-
-    return 0;
-}
 
 void yyerror(char const* s) 
 {
