@@ -6,7 +6,7 @@
     #define YY_USER_ACTION updateLocation();
     #define YY_DECL int yylex()
 
-    #include "visitor.h"
+    #include "AST/visitor.h"
     #include "syntax_analyzer.tab.h"
     #include <stdio.h>
     #include <ctype.h>
