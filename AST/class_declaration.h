@@ -12,8 +12,8 @@ namespace AST {
     class ClassDeclaration: public Visitable
     {
     public:
-        explicit ClassDeclaration(Id* id, Id* parentId, VarDeclarationList* vars, MethodDeclarationList* methods):
-                id_(id), parentId_(parentId)
+        explicit ClassDeclaration(Id* id, Id* parentId, VarDeclarationList* vars, MethodDeclarationList* methods, Coordinates coordinates):
+                id_(id), parentId_(parentId), coordinates_(coordinates)
         {
             vars_.clear();
             if (vars != nullptr) {
@@ -33,14 +33,16 @@ namespace AST {
 
         std::unique_ptr<Id> id_;
         std::unique_ptr<Id> parentId_;
-        std::vector<VarDeclaration*> vars_;
-        std::vector<MethodDeclaration*> methods_;
+        std::vector<VarDeclaration*> vars_{};
+        std::vector<MethodDeclaration*> methods_{};
+        Coordinates coordinates_;
     };
 
     class ClassDeclarationList
     {
     public:
-        explicit ClassDeclarationList(ClassDeclarationList* previousList, ClassDeclaration* classDeclaration)
+        explicit ClassDeclarationList(ClassDeclarationList* previousList, ClassDeclaration* classDeclaration, Coordinates coordinates):
+                coordinates_(coordinates)
         {
             class_declarations_.clear();
             if (previousList != nullptr)
@@ -55,14 +57,15 @@ namespace AST {
             return class_declarations_;
         }
 
-        std::vector<ClassDeclaration*> class_declarations_;
+        std::vector<ClassDeclaration*> class_declarations_{};
+        Coordinates coordinates_;
     };
 
     class MainClass: public Visitable
     {
     public:
-        explicit MainClass(Id* id, Id* parameters, StatementList* statements):
-        id_(id), parameters_(parameters)
+        explicit MainClass(Id* id, Id* parameters, StatementList* statements, Coordinates coordinates):
+        id_(id), parameters_(parameters), coordinates_(coordinates)
         {
             statements_.clear();
             if (statements != nullptr) {
@@ -76,8 +79,9 @@ namespace AST {
         }
 
         std::unique_ptr<Id> id_;
-        Id* parameters_;
-        std::vector<IStatement*> statements_;
+        Id* parameters_{};
+        std::vector<IStatement*> statements_{};
+        Coordinates coordinates_;
     };
 
 }

@@ -58,6 +58,7 @@ namespace AST {
         virtual void visit(const VarDeclaration*) = 0;
         virtual void visit(const MethodDeclaration*) = 0;
         virtual void visit(const Argument*) = 0;
+        virtual void visit(const IType*) = 0;
         virtual void visit(const Statements*) = 0;
         virtual void visit(const IfElseStatement*) = 0;
         virtual void visit(const WhileStatement*) = 0;

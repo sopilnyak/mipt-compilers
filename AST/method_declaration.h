@@ -16,11 +16,12 @@ namespace AST {
     public:
         explicit MethodDeclaration(MethodModifier* modifier, IType* type, Id* id,
                           ArgumentList* arguments, VarDeclarationList* vars,
-                          StatementList* statements, IExpression* expression):
+                          StatementList* statements, IExpression* expression, Coordinates coordinates):
                 modifier_(modifier),
                 type_(type),
                 id_(id),
-                expression_(expression)
+                expression_(expression),
+                coordinates_(coordinates)
         {
             arguments_.clear();
             if (arguments != nullptr) {
@@ -50,12 +51,14 @@ namespace AST {
         std::vector<VarDeclaration*> vars_;
         std::vector<IStatement*> statements_;
         std::unique_ptr<IExpression> expression_;
+        Coordinates coordinates_;
     };
 
     class MethodDeclarationList
     {
     public:
-        explicit MethodDeclarationList(MethodDeclarationList* previousList, MethodDeclaration* method)
+        explicit MethodDeclarationList(MethodDeclarationList* previousList, MethodDeclaration* method, Coordinates coordinates):
+                coordinates_(coordinates)
         {
             methods_.clear();
             if (previousList != nullptr)
@@ -70,6 +73,7 @@ namespace AST {
         }
 
         std::vector<MethodDeclaration*> methods_;
+        Coordinates coordinates_;
     };
 
 }

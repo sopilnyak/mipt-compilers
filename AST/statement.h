@@ -22,7 +22,8 @@ namespace AST {
     class StatementList: public IStatement
     {
     public:
-        explicit StatementList(StatementList* previousList, IStatement* statement)
+        explicit StatementList(StatementList* previousList, IStatement* statement, Coordinates coordinates):
+                coordinates_(coordinates)
         {
             statements_.clear();
             if (previousList != nullptr)
@@ -37,13 +38,15 @@ namespace AST {
             return statements_;
         }
 
-        std::vector<IStatement*> statements_;
+        std::vector<IStatement*> statements_{};
+        Coordinates coordinates_;
     };
 
     class Statements: public IStatement
     {
     public:
-        explicit Statements(StatementList* statements)
+        explicit Statements(StatementList* statements, Coordinates coordinates):
+                coordinates_(coordinates)
         {
             statements_.clear();
             statements_= std::move(statements->getStatements());
@@ -54,14 +57,15 @@ namespace AST {
             visitor->visit(this);
         }
 
-        std::vector<IStatement*> statements_;
+        std::vector<IStatement*> statements_{};
+        Coordinates coordinates_;
     };
 
     class IfElseStatement: public IStatement
     {
     public:
-        explicit IfElseStatement(IExpression* condition, IStatement* actionIf, IStatement* actionElse):
-                condition_(condition), actionIf_(actionIf), actionElse_(actionElse)
+        explicit IfElseStatement(IExpression* condition, IStatement* actionIf, IStatement* actionElse, Coordinates coordinates):
+                condition_(condition), actionIf_(actionIf), actionElse_(actionElse), coordinates_(coordinates)
         {}
 
         void accept(Visitor* visitor) override
@@ -69,16 +73,17 @@ namespace AST {
             visitor->visit(this);
         }
 
-        IExpression* condition_;
+        IExpression* condition_{};
         IStatement* actionIf_;
         IStatement* actionElse_;
+        Coordinates coordinates_;
     };
 
     class WhileStatement: public IStatement
     {
     public:
-        explicit WhileStatement(IExpression* condition, IStatement* action):
-                condition_(condition), action_(action)
+        explicit WhileStatement(IExpression* condition, IStatement* action, Coordinates coordinates):
+                condition_(condition), action_(action), coordinates_(coordinates)
         {}
 
         void accept(Visitor* visitor) override
@@ -86,15 +91,16 @@ namespace AST {
             visitor->visit(this);
         }
 
-        std::unique_ptr<IExpression> condition_;
-        std::unique_ptr<IStatement> action_;
+        std::unique_ptr<IExpression> condition_{};
+        std::unique_ptr<IStatement> action_{};
+        Coordinates coordinates_;
     };
 
     class SystemOutStatement: public IStatement
     {
     public:
-        explicit SystemOutStatement(IExpression* toPrint):
-                toPrint_(toPrint)
+        explicit SystemOutStatement(IExpression* toPrint, Coordinates coordinates):
+                toPrint_(toPrint), coordinates_(coordinates)
         {}
 
         void accept(Visitor* visitor) override
@@ -102,14 +108,15 @@ namespace AST {
             visitor->visit(this);
         }
 
-        std::unique_ptr<IExpression> toPrint_;
+        std::unique_ptr<IExpression> toPrint_{};
+        Coordinates coordinates_;
     };
 
     class AssignStatement: public IStatement
     {
     public:
-        explicit AssignStatement(Id* lValue, IExpression* rValue):
-                lValue_(lValue), rValue_(rValue)
+        explicit AssignStatement(Id* lhs, IExpression* rhs, Coordinates coordinates):
+                lhs_(lhs), rhs_(rhs), coordinates_(coordinates)
         {}
 
         void accept(Visitor* visitor) override
@@ -117,15 +124,16 @@ namespace AST {
             visitor->visit(this);
         }
 
-        std::unique_ptr<Id> lValue_;
-        std::unique_ptr<IExpression> rValue_;
+        std::unique_ptr<Id> lhs_{};
+        std::unique_ptr<IExpression> rhs_{};
+        Coordinates coordinates_;
     };
 
     class ArrayAssignStatement: public IStatement
     {
     public:
-        explicit ArrayAssignStatement(Id* lValue, IExpression* index, IExpression* rValue):
-                lValue_(lValue), index_(index), rValue_(rValue)
+        explicit ArrayAssignStatement(Id* lhs, IExpression* index, IExpression* rhs, Coordinates coordinates):
+                lhs_(lhs), index_(index), rhs_(rhs), coordinates_(coordinates)
         {}
 
         void accept(Visitor* visitor) override
@@ -133,9 +141,10 @@ namespace AST {
             visitor->visit(this);
         }
 
-        std::unique_ptr<Id> lValue_;
-        std::unique_ptr<IExpression> index_;
-        std::unique_ptr<IExpression> rValue_;
+        std::unique_ptr<Id> lhs_{};
+        std::unique_ptr<IExpression> index_{};
+        std::unique_ptr<IExpression> rhs_{};
+        Coordinates coordinates_;
     };
 
 }

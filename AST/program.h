@@ -12,8 +12,8 @@ namespace AST {
     class Program: public Visitable
     {
     public:
-        explicit Program(MainClass* main, ClassDeclarationList* classes):
-                main_(main)
+        explicit Program(MainClass* main, ClassDeclarationList* classes, Coordinates coordinates):
+                main_(main), coordinates_(coordinates)
         {
             classes_.clear();
             if (classes != nullptr) {
@@ -27,7 +27,8 @@ namespace AST {
         }
 
         std::unique_ptr<MainClass> main_;
-        std::vector<ClassDeclaration*> classes_;
+        std::vector<ClassDeclaration*> classes_{};
+        Coordinates coordinates_;
     };
 
 }

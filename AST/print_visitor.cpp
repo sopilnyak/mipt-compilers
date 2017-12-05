@@ -127,10 +127,13 @@ namespace AST {
 
     void PrintVisitor::visit(const AssignStatement* node)  {
         printVertex(node, "=");
-        node->lValue_->accept(this);
-        node->rValue_->accept(this);
-        printEdge(node, node->lValue_.get(), "left");
-        printEdge(node, node->rValue_.get(), "right");
+        node->lhs_->accept(this);
+        node->rhs_->accept(this);
+        printEdge(node, node->lhs_.get(), "left");
+        printEdge(node, node->rhs_.get(), "right");
+    }
+
+    void PrintVisitor::visit(const IType* node)  {
     }
 
     void PrintVisitor::visit(const IfElseStatement* node)
@@ -168,12 +171,12 @@ namespace AST {
     void PrintVisitor::visit(const ArrayAssignStatement* node)
     {
         printVertex(node, "=");
-        node->lValue_->accept(this);
-        printEdge(node, node->lValue_.get(), "array");
+        node->lhs_->accept(this);
+        printEdge(node, node->lhs_.get(), "array");
         node->index_->accept(this);
         printEdge(node, node->index_.get(), "index");
-        node->rValue_->accept(this);
-        printEdge(node, node->rValue_.get());
+        node->rhs_->accept(this);
+        printEdge(node, node->rhs_.get());
     }
 
     void PrintVisitor::visit(const ArrayLengthExpression* node)

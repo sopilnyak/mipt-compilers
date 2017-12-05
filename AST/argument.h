@@ -10,8 +10,8 @@ namespace AST {
     class Argument: public Visitable
     {
     public:
-        explicit Argument(IType* type, Id* id):
-                type_(type), id_(id)
+        explicit Argument(IType* type, Id* id, Coordinates coordinates):
+                type_(type), id_(id), coordinates_(coordinates)
         {}
 
         void accept(Visitor* visitor) override
@@ -19,26 +19,29 @@ namespace AST {
             visitor->visit(this);
         }
 
-        std::unique_ptr<IType> type_;
-        std::unique_ptr<Id> id_;
+        Coordinates coordinates_;
+        std::unique_ptr<IType> type_{};
+        std::unique_ptr<Id> id_{};
     };
 
     class ArgumentList
     {
     public:
-        explicit ArgumentList(ArgumentList* previousList, IType* type, Id* id)
+        explicit ArgumentList(ArgumentList* previousList, IType* type, Id* id, Coordinates coordinates):
+                coordinates_(coordinates)
         {
             arguments_.clear();
             if (previousList != nullptr)
             {
                 arguments_ = std::move(previousList->getArguments());
             }
-            arguments_.push_back(new Argument(type, id));
+            arguments_.push_back(new Argument(type, id, coordinates_));
         }
 
-        ArgumentList(IType* type, Id* id)
+        ArgumentList(IType* type, Id* id, Coordinates coordinates):
+                coordinates_(coordinates)
         {
-            Argument* argument = new Argument(type, id);
+            Argument* argument = new Argument(type, id, coordinates);
             arguments_.clear();
             arguments_.push_back(argument);
         }
@@ -48,7 +51,8 @@ namespace AST {
             return arguments_;
         }
 
-        std::vector<Argument*> arguments_;
+        std::vector<Argument*> arguments_{};
+        Coordinates coordinates_;
     };
 
 }

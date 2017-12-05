@@ -8,7 +8,6 @@
 #include "id.h"
 #include "method_declaration.h"
 #include "method_modifier.h"
-#include "print_visitor.h"
 #include "statement.h"
 #include "type.h"
 #include "var_declaration.h"
@@ -34,6 +33,7 @@ namespace AST {
         virtual void visit(const VarDeclaration*);
         virtual void visit(const MethodDeclaration*);
         virtual void visit(const Argument*);
+        virtual void visit(const IType*);
         virtual void visit(const Statements*);
         virtual void visit(const IfElseStatement*);
         virtual void visit(const WhileStatement*);

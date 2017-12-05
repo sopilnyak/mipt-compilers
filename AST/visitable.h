@@ -3,6 +3,19 @@
 
 namespace AST {
 
+    struct Coordinates
+    {
+        int Row;
+        int Column;
+        Coordinates(int row, int column):
+                Row(row),
+                Column(column)
+        {}
+        Coordinates(const Coordinates& coordinates) :
+                Row(coordinates.Row), Column(coordinates.Column)
+        {}
+    };
+
     class Visitor;
 
     class Visitable

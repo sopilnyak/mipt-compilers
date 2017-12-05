@@ -14,8 +14,9 @@ namespace AST {
     class MethodModifier
     {
     public:
-        explicit MethodModifier(MethodModifierValue modifier):
-                modifier_(modifier) {
+        explicit MethodModifier(MethodModifierValue modifier, Coordinates coordinates):
+                modifier_(modifier), coordinates_(coordinates)
+        {
             switch (modifier) {
                 case T_PUBLIC:
                     string_modifier_ = "public";
@@ -26,6 +27,7 @@ namespace AST {
 
         MethodModifierValue modifier_;
         std::string string_modifier_;
+        Coordinates coordinates_;
     };
 
 }

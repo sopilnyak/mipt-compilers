@@ -9,7 +9,8 @@ namespace AST {
     class Id: public Visitable
     {
     public:
-        explicit Id(const std::string &name)
+        explicit Id(const std::string &name, Coordinates coordinates):
+                coordinates_(coordinates)
         {
             if (!name.empty())
             {
@@ -27,6 +28,7 @@ namespace AST {
         }
 
         std::string name_;
+        Coordinates coordinates_;
     };
 
 }
